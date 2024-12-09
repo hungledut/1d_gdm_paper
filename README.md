@@ -1,6 +1,12 @@
-## Run AI
+# GDM-NETWORK
 
-```bash
+## Windows
+
+### Run AI
+
+Install uv at <https://github.com/astral-sh/uv>
+
+```pwsh
 cd ai
 uv venv
 .venv/bin/activate.<gi gi do tuy>
@@ -8,9 +14,11 @@ uv sync
 flask --app main run
 ```
 
-## Run FE
+### Run FE
 
-```bash
+Install bun at <https://bun.sh/docs/installation>
+
+```pwsh
 cd fe
 bun dev
 ```
