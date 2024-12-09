@@ -79,7 +79,7 @@
 	{:else if samples.length > 0}
 		<div class="samples-container">
 			{#each samples as sample, i}
-				<a href={getSampleUrl(sample, i)} class="sample-card">
+				<div class="sample-card">
 					<h3>Sample {i + 1}</h3>
 					<div class="sample-grid">
 						<div class="metric">
@@ -110,8 +110,8 @@
 					<div class="label-info" class:attack={sample.label === 1}>
 						<strong>Classification:</strong> {sample.attack_cat} (Label: {sample.label})
 					</div>
-					<div class="view-details">Click to view all details →</div>
-				</a>
+					<a href={getSampleUrl(sample, i)} class="view-details">Click to view all details →</a>
+				</div>
 			{/each}
 		</div>
 	{:else}

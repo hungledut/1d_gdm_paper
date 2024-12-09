@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import type { NetworkSample } from '../stores';
 
-	let sample: any = null;
+	let sample: NetworkSample | null = null;
 	let sampleIndex: number = 0;
 
 	function formatNumber(num: number): string {
@@ -59,7 +60,7 @@
 	];
 
     const labelMap = {
-        'protocol': 'Protocol',
+        'proto': 'Protocol',
         'service': 'Service',
         'state': 'State',
         'dur': 'Duration',
@@ -109,7 +110,7 @@
 		return labelMap[metric as keyof typeof labelMap] || metric
 	}
 
-	function formatValue(key: string, value: any): string {
+	function formatValue(key: string, value: NetworkSample[keyof NetworkSample]): string {
 		if (typeof value === 'number') {
 			if (key.includes('dur') || key.includes('rtt') || key.includes('synack') || key.includes('ackdat')) {
 				return `${formatNumber(value)}s`;
@@ -122,6 +123,11 @@
 			}
 			return formatNumber(value);
 		}
+		console.log({key, value})
+		if (key.includes('proto') || key.includes('service')) {
+			return value.toString().toUpperCase();
+		}
+		// if (key.includes)
 		return value.toString();
 	}
 </script>
@@ -147,7 +153,7 @@
 					{#each group.metrics as metric}
 						<div class="metric-card">
 							<div class="metric-label">{getMetricLabel(metric)}</div>
-							<div class="metric-value">{formatValue(metric, sample[metric])}</div>
+							<div class="metric-value">{formatValue(metric, sample[metric as keyof NetworkSample])}</div>
 						</div>
 					{/each}
 				</div>
