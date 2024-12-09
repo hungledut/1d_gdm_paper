@@ -5,12 +5,16 @@ import category_encoders as ce
 import torch
 from sklearn.preprocessing import MinMaxScaler
 from denoising_diffusion_pytorch import Unet1D, GaussianDiffusion1D, Trainer1D, Dataset1D
-from flask import Flask
+from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
+
 import threading
 import time
 
 
 app = Flask(__name__)
+CORS(app, support_credentials=True)
+
 
 diffusion = None
 trainer = None
@@ -22,14 +26,20 @@ res_cached = []
 infer_mutex = threading.Lock()
 
 @app.route('/run')
+@cross_origin(supports_credentials=True)
 def run():
-    res = None
-    if len(res_cached) > 0:
-        res = res_cached.pop(0)
+    global res_cached
+    count = int(request.args.get('count', 10))
+    res = [] 
+    if len(res_cached) > count:
+        res = res_cached[:count]
+        res_cached = res_cached[count:]
         time.sleep(3)
     else:
-        res = infer()
-    return res.to_json()
+        with infer_mutex:
+            res = res_cached[:count]
+            res_cached = res_cached[count:]
+    return jsonify(res)
 
 
 def load_model(input, weights):
@@ -84,12 +94,12 @@ def load_model(input, weights):
     trainer.load(weights)
 
 
-def infer():
+def infer(count: int = 100):
     # Acquire mutex before running inference
     with infer_mutex:
         if diffusion is None:
             load_model()
-        sampled_seq = diffusion.sample(batch_size = 100)
+        sampled_seq = diffusion.sample(batch_size = count)
         sampled_seq_sq = torch.squeeze(sampled_seq, 1)[:,0:-3]
         sampled_seq_sq = scaler.inverse_transform(sampled_seq_sq.cpu())
         a = sampled_seq_sq
@@ -134,7 +144,7 @@ def infer():
 
         data_decoded[columns_to_convert] = data_decoded[columns_to_convert].astype(float).round().astype(int)
 
-        return data_decoded
+        return data_decoded.to_dict(orient='records')
 
 
 def GDM_model(input,weights):
@@ -243,9 +253,9 @@ load_model(input, weights)
 def add_res_to_cache():
     global res_cached
     while True:
-        if len(res_cached) < 10:
-            res = infer()
-            res_cached.append(res)
+        if len(res_cached) < 10000:
+            res = infer(1000)
+            res_cached.extend(res)
             print(f'Added {len(res_cached)} results to cache')
         time.sleep(1)
 t = threading.Thread(target=add_res_to_cache,args=())

@@ -1,0 +1,51 @@
+import { writable } from 'svelte/store';
+
+export interface NetworkSample {
+    dur: number;
+    proto: string;
+    service: string;
+    state: string;
+    spkts: number;
+    dpkts: number;
+    sbytes: number;
+    dbytes: number;
+    rate: number;
+    sttl: number;
+    dttl: number;
+    sload: number;
+    dload: number;
+    sloss: number;
+    dloss: number;
+    sinpkt: number;
+    dinpkt: number;
+    sjit: number;
+    djit: number;
+    swin: number;
+    stcpb: number;
+    dtcpb: number;
+    dwin: number;
+    tcprtt: number;
+    synack: number;
+    ackdat: number;
+    smean: number;
+    dmean: number;
+    trans_depth: number;
+    response_body_len: number;
+    ct_srv_src: number;
+    ct_state_ttl: number;
+    ct_dst_ltm: number;
+    ct_src_dport_ltm: number;
+    ct_dst_sport_ltm: number;
+    ct_dst_src_ltm: number;
+    is_ftp_login: number;
+    ct_ftp_cmd: number;
+    ct_flw_http_mthd: number;
+    ct_src_ltm: number;
+    ct_srv_dst: number;
+    is_sm_ips_ports: number;
+    attack_cat: string;
+    label: number;
+}
+
+export const samplesStore = writable<NetworkSample[]>([]);
+export const sampleCountStore = writable<number>(10); 
