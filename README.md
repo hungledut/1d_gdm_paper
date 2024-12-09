@@ -9,7 +9,7 @@ Install uv at <https://github.com/astral-sh/uv>
 ```pwsh
 cd ai
 uv venv
-.venv/bin/activate.<gi gi do tuy>
+.venv/bin/activate.ps1
 uv sync
 flask --app main run
 ```
@@ -23,8 +23,8 @@ cd fe
 bun dev
 ```
 
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image-3.png)
-![alt text](image-4.png)
+![alt text](resources/image.png)
+![alt text](resources/image-1.png)
+![alt text](resources/image-2.png)
+![alt text](resources/image-3.png)
+![alt text](resources/image-4.png)
