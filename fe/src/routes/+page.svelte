@@ -83,10 +83,10 @@
 					<h3>Sample {i + 1}</h3>
 					<div class="sample-grid">
 						<div class="metric">
-							<strong>Protocol:</strong> {sample.proto}
+							<strong>Protocol:</strong> {sample.proto.toUpperCase()}
 						</div>
 						<div class="metric">
-							<strong>Service:</strong> {sample.service}
+							<strong>Service:</strong> {sample.service.toUpperCase()}
 						</div>
 						<div class="metric">
 							<strong>State:</strong> {sample.state}
