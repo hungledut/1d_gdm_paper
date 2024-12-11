@@ -101,6 +101,7 @@ def infer(count: int = 100):
             load_model()
         sampled_seq = diffusion.sample(batch_size = count)
         sampled_seq_sq = torch.squeeze(sampled_seq, 1)[:,0:-3]
+        print(f"{sampled_seq_sq.shape=}")
         sampled_seq_sq = scaler.inverse_transform(sampled_seq_sq.cpu())
         a = sampled_seq_sq
         #### 
