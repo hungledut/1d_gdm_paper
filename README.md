@@ -1,7 +1,5 @@
 # A One-Dimensional Generative Diffusion Model for Network Traffic Dataset Generation
 This is the source-code of "A One-Dimensional Generative Diffusion Model for Network Traffic Dataset Generation" paper published in "Lecture notes in Computer Science"
-## Abstract
-Generative AI emerged as a powerful method for generating new data, which is famous for image, video, and text generation. For this inspiration, our study aims to leverage the Generative AI for Network Traffic Dataset Generation. This type of data is very important to cybersecurity, as it is used for detection, prediction, and classification tasks in the network traffic. Recent studies have utilized the variant of Generative AI models for generating Network Traffic Data, gaining considerable achievements. In our study, we proposed a novel approach using the One-Dimensional Generative Diffusion Model to generate the synthetic Network Traffic data. As a result, our proposed model surpasses the previous studies’ models on the UNSW-NB15 dataset, with the Chi-Squared Test and Kolmogorov-Smirnov Test values being 0.863 and 0.838 respectively. Moreover, our proposed method considerably improves the performance of detecting attack activities of network traffic in terms of accuracy and F1-score, demonstrating its powers in cybersecurity.
 
 ## Windows
 
