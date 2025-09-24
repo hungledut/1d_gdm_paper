@@ -1,5 +1,5 @@
 # A One-Dimensional Generative Diffusion Model for Network Traffic Dataset Generation
-
+This is the source-code of "A One-Dimensional Generative Diffusion Model for Network Traffic Dataset Generation" paper published in "Lecture notes in Computer Science"
 ## Windows
 
 ### Run AI
