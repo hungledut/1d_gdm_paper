@@ -1,4 +1,4 @@
-# GDM-NETWORK
+# A One-Dimensional Generative Diffusion Model for Network Traffic Dataset Generation
 
 ## Windows
 
